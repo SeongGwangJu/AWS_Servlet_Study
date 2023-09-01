@@ -26,6 +26,8 @@ public class SignupServlet extends HttpServlet {
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 				throws ServletException, IOException {
 		
+		
+		
 		InputStream inputstream = request.getInputStream();
 		BufferedReader bufferedReader =
 				new BufferedReader(new InputStreamReader(inputstream));
@@ -48,7 +50,6 @@ public class SignupServlet extends HttpServlet {
 //		key를 통해 userMap의 value에 접근
 //		System.out.println(userMap.get("key"));
 //		System.out.println(userMap.get("username")); ...
-		System.out.println("회원가입");
 		
 		ResponseUtil.response(response).of(200).body("회원가입 성공!!");
 		ResponseUtil.response(response).of(400).body("회원가입 실패!!");

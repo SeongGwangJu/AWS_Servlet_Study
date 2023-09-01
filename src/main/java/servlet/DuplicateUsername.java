@@ -20,21 +20,21 @@ public class DuplicateUsername extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		String username = request.getParameter("username");
 		
-//		ID 중복확인
+		//	ID 중복확인
 		for (int i = 0; i < usernames.length; i++) {
-			
 			/* 만약 username.equals()를 쓰면, null일 경우 NullPointerException이 발생하므로
 			 * Null체크(if (!null)) 를 한번 더 해야한다. 하지만
 			 * Objects.equals를 하면 null을 체크할 필요x */
 			if(Objects.equals(usernames[i], username)) {
 				ResponseUtil.response(response).of(400).body(true);
+				return;
 			}
-			
 		}
 		
 		ResponseUtil.response(response).of(200).body(false);
 	}
-
+	
 }

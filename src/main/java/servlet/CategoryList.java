@@ -90,7 +90,11 @@ public class CategoryList extends HttpServlet {
 		
 		Gson gson = new Gson();
 		response.setCharacterEncoding("UTF-8");
+		
+		//객체 타입으로 보내줌
 		response.setContentType("application/json");
+		
+		//Json형식으로 받아와서 문자열로 변환
 		response.getWriter().println(gson.toJson(findFeedByCategoryName(categoryName)).toString());
 		//getWriter : PrintWriter임
 	}

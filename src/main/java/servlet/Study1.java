@@ -13,7 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 public class Study1 extends HttpServlet {
 	
 	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("Post 요청 : modified");
+	}
+	
+	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("get 요청");
+		System.out.println("get요청ㅎ");
 	}
 }

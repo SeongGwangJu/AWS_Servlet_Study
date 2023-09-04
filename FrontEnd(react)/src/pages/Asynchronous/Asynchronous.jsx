@@ -49,9 +49,7 @@ function Asynchronous(props) {
         reject(new Error("홀수"))
       }
     })
-
-    //resolve가 일어나면 then
-    p1.then(result => {
+    p1.then(result => { //resolve가 일어나면 then
       console.log(result);
       return "첫번째 then의 리턴"; //이 return값이 아래의 console.log에 들어간다.
     }).then(result => {
@@ -60,10 +58,39 @@ function Asynchronous(props) {
       console.log(error);
     });
   }
+//async : promise를 편하게 쓸 수 있다.
+  const handleClick3 = () => {
 
+    //이건 promise. 비교해볼까?
+    const printUser2 = () => {
+      return new Promise((resolve, reject) => {
+        resolve("유저2");
+        reject(new Error("오류2"));
+      });
+    }
+    printUser2().then(r => console.log(r));
+    printUser2().catch(r => console.log(r));
+    // const printUser = async function() { }
+    const printUser = async () => {
+      try {
+        // await : 비동기안에서 비동기처리할 때.
+        // await밑에있는 코드가 printUser2 메서드가  기다린다.
+        await printUser2().then((r) => {
+          console.log(r);
+        });
+        throw new Error("오류처리"); //오류처리 : throw
+      } catch (error) {
+        console.log(error);
+      }
+      return "유저1";
+    }
+    printUser().then(r => console.log(r)); //promise처럼 쓸 수 있다.
+  }
   return (
     <div>
-      <button onClick={handleClick2}>클릭</button>
+      <button onClick={handleClick}>클릭1</button>
+      <button onClick={handleClick2}>클릭2</button>
+      <button onClick={handleClick3}>클릭3</button>
     </div>
   );
 }

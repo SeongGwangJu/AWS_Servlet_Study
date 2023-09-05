@@ -33,7 +33,6 @@ public class SigninServlet extends HttpServlet {
 		for(User user : UserData.userList) {
 			if(Objects.equals(user.getUsername(), signinUser.get("username")) 
 				&& Objects.equals(user.getPassword(), signinUser.get("password"))) {
-				System.out.println("test");
 				// 09/05
 				String token = UUID.randomUUID().toString();
 				SecurityContextHolder.addAuth(new Authentication(user, token));
@@ -43,6 +42,6 @@ public class SigninServlet extends HttpServlet {
 			}
 		}
 		System.out.println("In SigninServlet, responsed '200' and " + responseData);
-		ResponseUtil.response(response).of(200).body(responseData);
+		ResponseUtil.response(response).of(200).body(JsonParseUtil.toJson(responseData));
 	}
 }

@@ -26,8 +26,22 @@ public class SecurityContextHolder {
 		return false;
 	}
 	
-	public static void removeAuth() {
-		
+	public static Authentication findAuthenticationByToken(String token) {
+		for(Authentication authentication : authentications) {
+			if(Objects.equals(authentication.getToken(), token)) {
+				return authentication;
+			}
+		}
+		return null;
+	}
+	
+	public static void removeAuth(String token) {
+		for(Authentication authentication : authentications) {
+			if(Objects.equals(authentication.getToken(), token)) {
+				authentications.remove(authentication);
+				break;
+			}
+		}
 	}
 	
 }

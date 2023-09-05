@@ -15,7 +15,6 @@ const SInputLayout = css`
         height: 100%;
         text-align: center;
     }
-
 `;
 function Signup(props) {
 

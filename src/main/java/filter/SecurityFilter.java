@@ -15,9 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import security.SecurityContextHolder;
 import utils.ResponseUtil;
 
-/**
- * Servlet Filter implementation class SecurityFilter
- */
+
 @WebFilter({ "/*", "/user/*", "/admin/*" })
 public class SecurityFilter extends HttpFilter implements Filter {
 
@@ -36,10 +34,9 @@ public class SecurityFilter extends HttpFilter implements Filter {
 				return;
 			}
 		}
-		String token = req.getHeader("Authorizaion");
-		
-		//인증되지 않은 상태면 401응답
-		if(!SecurityContextHolder.isAuthenticated(token)) {
+		String token = req.getHeader("Authorization");
+		//둘다 실패했을 경우 + 인증x 401응답. !false + !false => true
+		if(!req.getMethod().equalsIgnoreCase("options") && !SecurityContextHolder.isAuthenticated(token)) {
 			ResponseUtil.response(resp).of(401).body("인증실패");
 			return;
 		}

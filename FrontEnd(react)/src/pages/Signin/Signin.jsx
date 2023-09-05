@@ -22,13 +22,20 @@ function Signin(props) {
 				signinInput
 			);
 
-			console.log(response);
 			// if (!response.data) {
-			// 	alert("로그인 실패");
-			// 	return;
-			// }
-
+				// 	alert("로그인 실패");
+				// 	return;
+				// }
+				console.log(response);
+			console.log(response.data.token)
+			if(!response.data.token) {
+				alert("로그인 실패")
+				return;
+			}
+				// ?를 써주면, token(data)이 없는 경우 참조를 안한다
+			localStorage.setItem("token", response.data?.token);
 			alert("환영합니다.");
+
 		} catch (error) {
 			console.log(error);
 		}

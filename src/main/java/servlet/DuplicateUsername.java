@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import data.UserData;
 import entity.User;
+import utils.JsonParseUtil;
 import utils.ResponseUtil;
 
 @WebServlet("/auth/signup/duplicate/username")
@@ -26,7 +27,7 @@ public class DuplicateUsername extends HttpServlet {
 		
 		for(User user : UserData.userList) {
 			if(Objects.equals(user.getUsername(), username)) {
-//				responseData = true;
+				responseData = true;
 				break;
 			}
 		}
@@ -42,6 +43,6 @@ public class DuplicateUsername extends HttpServlet {
 //			}
 //		}
 //		
-		ResponseUtil.response(response).of(200).body(responseData);
+		ResponseUtil.response(response).of(200).body(JsonParseUtil.toJson(responseData));
 	}
 }

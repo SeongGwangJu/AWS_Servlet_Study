@@ -53,7 +53,8 @@ public class SignupServlet extends HttpServlet {
 				.username((String) userMap.get("username"))
 				.password((String) userMap.get("password"))
 				.name((String) userMap.get("name"))
-				.email((String) userMap.get("email")).build();
+				.email((String) userMap.get("email"))
+				.build();
 
 		userList.add(user);
 

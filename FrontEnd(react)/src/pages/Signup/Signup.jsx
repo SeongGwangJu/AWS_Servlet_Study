@@ -60,11 +60,12 @@ function Signup(props) {
             try {
                 response = await axios.post(
                     "http://localhost:8080/servlet_study_seonggwang/auth/signup",signupUser);
-                    console.log(response)
                 if(!response.data) {
                     throw new Error(response);
                 }
                 alert("회원가입 성공!");
+                console.log("▼ response.data");
+                console.log(response.data);
                 navigate("/signin")
             }catch(error) {
                 console.log(error);

@@ -23,39 +23,40 @@ public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 헤더에서
 		String token = request.getHeader("Authorization");
-
+		System.out.println("token");
+		System.out.println(token);
 		User user = SecurityContextHolder.findAuthenticationByToken(token).getUser();
-
+		System.out.println("user");
+		System.out.println(user);
 		ResponseUtil.response(response).of(200).body(JsonParseUtil.toJson(user));
 	}
 
 	@Override
-	protected void doPut(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, Object> profileMap = JsonParseUtil.toMap(request.getInputStream());
 
-		Authentication authentication = SecurityContextHolder
-				.findAuthenticationByToken(request.getHeader("Authorization"));
+		Authentication authentication = SecurityContextHolder.findAuthenticationByToken(request.getHeader("Authorization"));
 		User oldUser = authentication.getUser();
 
 		List<User> userList = UserData.userList;
 
-		User user = User.builder().userId(userList.size() + 1).username((String) profileMap.get("username"))
-				.password((String) profileMap.get("password")).name((String) profileMap.get("name"))
-				.email((String) profileMap.get("email")).build();
+		User user = User.builder()
+				.userId(oldUser.getUserId())
+				.username((String) profileMap.get("username"))
+				.password((String) profileMap.get("password"))
+				.name((String) profileMap.get("name"))
+				.email((String) profileMap.get("email"))
+				.build();
 
 		for (int i = 0; i < userList.size(); i++) {
-			if (userList.get(i).getUserId() == user.getUserId()) {
-				System.out.println("userList.get(i).getUserId() : " + userList.get(i).getUserId());
-				System.out.println("user.getUserId() :" + user.getUserId());
+			if(userList.get(i).getUserId() == user.getUserId()) {
 				userList.set(i, user);
 				authentication.setUser(user);
 				ResponseUtil.response(response).of(200).body(true);
-				break;
+				return;
 			}
 		}
 

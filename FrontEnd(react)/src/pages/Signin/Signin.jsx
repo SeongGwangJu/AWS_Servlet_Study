@@ -26,8 +26,8 @@ function Signin(props) {
 				// 	alert("로그인 실패");
 				// 	return;
 				// }
-				console.log(response);
-			console.log(response.data.token)
+			console.log("▼ response.data");
+			console.log(response.data);
 			if(!response.data.token) {
 				alert("로그인 실패")
 				return;

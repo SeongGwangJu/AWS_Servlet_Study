@@ -25,8 +25,7 @@ function EditProfile(props) {
 	useEffect(() => {
 		const getProfile = async () => {
 			try {
-				const response = await axios.get(
-					`http://localhost:8080/servlet_study_seonggwang/mypage/profile`,
+				const response = await axios.get(`http://localhost:8080/servlet_study_seonggwang/mypage/profile`,
 					{
 						headers: {
 							Authorization: localStorage.getItem("token"),
@@ -34,6 +33,10 @@ function EditProfile(props) {
 					}
 				);
 				setProfile(response.data);
+
+
+                console.log("response")
+                console.log(response.data)
 			} catch (error) {
 				console.log(error);
 			}

@@ -35,6 +35,9 @@ public class SecurityFilter extends HttpFilter implements Filter {
 			}
 		}
 		String token = req.getHeader("Authorization");
+		System.out.println(req.getMethod().equalsIgnoreCase("options"));
+		System.out.println(SecurityContextHolder.isAuthenticated(token));
+		//요청이 두번가니까 하나는 막으려고
 		//둘다 실패했을 경우 + 인증x 401응답. !false + !false => true
 		if(!req.getMethod().equalsIgnoreCase("options") && !SecurityContextHolder.isAuthenticated(token)) {
 			ResponseUtil.response(resp).of(401).body("인증실패");

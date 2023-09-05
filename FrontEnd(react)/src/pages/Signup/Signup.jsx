@@ -48,7 +48,7 @@ function Signup(props) {
         }
         //then then then하던걸 async await으로 정리
         const signup = async() => {
-            const response = await axios.get("http://localhost:8080/servlet_study_seonggwang/auth/signup/duplicate/username"
+            let response = await axios.get("http://localhost:8080/servlet_study_seonggwang/auth/signup/duplicate/username"
             , option);
             // await가 없으면 response는 undefined. =>아래의 중복검증은 의미가 없다.
             // await를 함으로써 비동기를 동기로 바꾼다.
@@ -61,6 +61,7 @@ function Signup(props) {
             try {
                 response = await axios.post(
                     "http://localhost:8080/servlet_study_seonggwang/auth/signup",signupUser);
+                    console.log(response)
                 if(!response.data) {
                     throw new Error(response);
                 }
@@ -69,18 +70,10 @@ function Signup(props) {
             }catch(error) {
                 console.log(error);
             }
-                return response;
+            return response;
         }
-        signup().then((response) => {
-            if(!response.data) { //회원가입 실패시 오류처리 !false => true
-                throw new Error(response);
-            }
 
-            alert("회원가입 성공!");
-        }).catch(error => {
-            console.log("error");
-            console.log("회원가입 실패")
-        })
+        signup();
 
         // // 응답이오면 then아래가 실행
         // axios.get("http://localhost:8080/servlet_study_seonggwang/auth/signup/duplicate/username", option)

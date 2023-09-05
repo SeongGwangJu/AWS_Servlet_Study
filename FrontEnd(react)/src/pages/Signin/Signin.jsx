@@ -22,10 +22,11 @@ function Signin(props) {
 				signinInput
 			);
 
-			if (!response.data) {
-				alert("로그인 실패");
-				return;
-			}
+			console.log(response);
+			// if (!response.data) {
+			// 	alert("로그인 실패");
+			// 	return;
+			// }
 
 			alert("환영합니다.");
 		} catch (error) {

@@ -62,6 +62,7 @@ public class SignupServlet extends HttpServlet {
 //		System.out.println(userMap.get("username")); ...
 		System.out.println(userMap);
 		
+		System.out.println("In SignupServlet, responsed '200' and " + true);
 		ResponseUtil.response(response).of(200).body(true);
 
 	}
